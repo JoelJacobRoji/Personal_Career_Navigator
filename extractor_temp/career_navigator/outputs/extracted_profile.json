@@ -1,0 +1,131 @@
+{
+  "personal_info": {
+    "name": "Contact Joel Jacob Roji",
+    "email": "",
+    "phone": "",
+    "location": "Bengaluru, Karnataka",
+    "headline": "| Event Coordinator @ IIIC | Senior Manager @ AIESEC |",
+    "current_role": "MATLAB Onramp Course",
+    "current_company": "AIESEC in India"
+  },
+  "experience": {
+    "years": 0,
+    "github_repos": 12,
+    "github_commits": 86,
+    "github_stars": 0
+  },
+  "skills": {
+    "technical_skills": [
+      "Angular",
+      "Bootstrap",
+      "C",
+      "CSS",
+      "Deep Learning",
+      "FastAPI",
+      "Git",
+      "Go",
+      "HTML",
+      "Java",
+      "JavaScript",
+      "MATLAB",
+      "MongoDB",
+      "NLP",
+      "NumPy",
+      "Pandas",
+      "PyTorch",
+      "Python",
+      "R",
+      "React",
+      "scikit-learn"
+    ],
+    "programming_languages": {
+      "TypeScript": 53.96,
+      "Python": 18.92,
+      "HTML": 10.44,
+      "CSS": 9.37,
+      "JavaScript": 4.96,
+      "C++": 1.53,
+      "Batchfile": 0.48,
+      "SCSS": 0.32,
+      "Procfile": 0.01
+    },
+    "soft_skills": [],
+    "total_technical_skills": 21
+  },
+  "education": [
+    {
+      "details": "sessions for junior students, addressing topics such as suicidal ideation,"
+    },
+    {
+      "details": "communication, personal conflicts, and emotional well -being."
+    },
+    {
+      "details": " Foster a safe and supportive environment that promotes awareness, resilience, and healthy coping"
+    },
+    {
+      "details": "strategies."
+    },
+    {
+      "details": "One on One Peer Trainer at Centre for Academic and Professional Support                        08/2025 – Present"
+    },
+    {
+      "details": " Delivered individualized academic guidance by assessing performance gaps and developing structured"
+    },
+    {
+      "details": "improvement plans ."
+    },
+    {
+      "details": " Manage d recruitment coordination processes, maintaining organized candidate tracking and onboarding"
+    },
+    {
+      "details": "workflows ."
+    }
+  ],
+  "certifications": [],
+  "github_profile": {
+    "username": "JoelJacobRoji",
+    "url": "https://github.com/JoelJacobRoji",
+    "top_repos": [
+      {
+        "name": "Audio_Call_Analyzer",
+        "description": null,
+        "language": "Python",
+        "stars": 0,
+        "url": "https://github.com/JoelJacobRoji/Audio_Call_Analyzer"
+      },
+      {
+        "name": "Course_Management_and_Enrollment_Portal",
+        "description": null,
+        "language": "TypeScript",
+        "stars": 0,
+        "url": "https://github.com/JoelJacobRoji/Course_Management_and_Enrollment_Portal"
+      },
+      {
+        "name": "GitHub_Demo",
+        "description": null,
+        "language": null,
+        "stars": 0,
+        "url": "https://github.com/JoelJacobRoji/GitHub_Demo"
+      },
+      {
+        "name": "JAM_Movie_Ticket_Booking",
+        "description": null,
+        "language": "C++",
+        "stars": 0,
+        "url": "https://github.com/JoelJacobRoji/JAM_Movie_Ticket_Booking"
+      },
+      {
+        "name": "Personal_Career_Navigator",
+        "description": null,
+        "language": null,
+        "stars": 0,
+        "url": "https://github.com/JoelJacobRoji/Personal_Career_Navigator"
+      }
+    ]
+  },
+  "data_sources": {
+    "resume": true,
+    "github": true,
+    "linkedin": true
+  }
+}
