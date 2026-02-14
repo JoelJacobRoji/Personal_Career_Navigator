@@ -1,0 +1,69 @@
+{
+  "job_requirements": {
+    "job_title": "Data Scientist",
+    "required_skills": [
+      "C",
+      "Data Visualization",
+      "Deep Learning",
+      "EDA",
+      "Machine Learning",
+      "Matplotlib",
+      "NLP",
+      "NumPy",
+      "Pandas",
+      "Python",
+      "SQL",
+      "Scikit-learn",
+      "Statistics"
+    ],
+    "critical_skills": [
+      "Statistics",
+      "Data Visualization",
+      "EDA",
+      "Scikit-learn",
+      "Pandas",
+      "Deep Learning",
+      "Matplotlib",
+      "Python",
+      "NLP",
+      "SQL"
+    ],
+    "years_experience_required": 0,
+    "education_required": [],
+    "total_skills_required": 13
+  },
+  "match_analysis": {
+    "overall_match_score": 55.08,
+    "skills_match_percentage": 46.15,
+    "critical_skills_match_percentage": 40.0,
+    "matching_skills": [
+      "C",
+      "Deep Learning",
+      "NLP",
+      "NumPy",
+      "Pandas",
+      "Python"
+    ],
+    "missing_skills": [
+      "Data Visualization",
+      "EDA",
+      "Machine Learning",
+      "Matplotlib",
+      "SQL",
+      "Scikit-learn",
+      "Statistics"
+    ],
+    "missing_critical_skills": [
+      "Data Visualization",
+      "EDA",
+      "Matplotlib",
+      "SQL",
+      "Scikit-learn",
+      "Statistics"
+    ],
+    "experience_match": true,
+    "user_experience_years": 0,
+    "required_experience_years": 0,
+    "recommendation": "🟠 Fair Match - 30-day roadmap recommended"
+  }
+}
