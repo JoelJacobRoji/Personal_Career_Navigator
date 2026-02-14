@@ -1,0 +1,25 @@
+{
+  "personal_info": {
+    "name": "Hackathon Tester",
+    "current_role": "Junior Developer"
+  },
+  "skills": {
+    "technical_skills": [
+      "Angular",
+      "React",
+      "Node.js",
+      "HTML",
+      "CSS",
+      "Relational DBMS",
+      "SQL",
+      "Database Normalization",
+      "Linked Lists",
+      "Git"
+    ],
+    "soft_skills": [
+      "Communication",
+      "Problem Solving",
+      "Teamwork"
+    ]
+  }
+}
