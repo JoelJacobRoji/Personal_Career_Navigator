@@ -36,7 +36,6 @@
 
 ## 🏗️ **Agentic Architecture**
 
-```mermaid
 graph TD
     A[📄 Resume PDF] --> B[📊 Analyzer Agents]
     C[👨‍💻 GitHub] --> B
