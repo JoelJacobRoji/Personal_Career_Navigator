@@ -1,84 +1,98 @@
 {
   "personal_info": {
-    "name": "Contact Joel Jacob Roji",
-    "email": "",
-    "phone": "",
+    "name": "Joel Jacob Roji",
+    "email": "joeljacobroji06@gmail.com",
+    "phone": "+ 91 7012032686",
     "location": "Bengaluru, Karnataka",
-    "headline": "| Event Coordinator @ IIIC | Senior Manager @ AIESEC |",
-    "current_role": "MATLAB Onramp Course",
-    "current_company": "AIESEC in India"
+    "headline": "",
+    "current_role": "",
+    "current_company": ""
   },
   "experience": {
-    "years": 0,
-    "github_repos": 12,
-    "github_commits": 86,
+    "years": 1,
+    "github_repos": 13,
+    "github_commits": 91,
     "github_stars": 0
   },
   "skills": {
     "technical_skills": [
       "Angular",
+      "Audio Processing",
       "Bootstrap",
       "C",
       "CSS",
+      "Cisco Packet Tracer",
+      "Data Cleaning",
+      "Data Structures",
       "Deep Learning",
+      "EDA",
+      "Exploratory Data Analysis",
       "FastAPI",
       "Git",
       "Go",
       "HTML",
       "Java",
       "JavaScript",
+      "Jupyter Notebook",
+      "Librosa",
+      "Linux",
       "MATLAB",
+      "MacOS",
+      "Matplotlib",
       "MongoDB",
       "NLP",
       "NumPy",
+      "OOP",
+      "Oracle",
+      "Oracle SQL",
       "Pandas",
+      "Probability",
       "PyTorch",
       "Python",
       "R",
       "React",
+      "SQL",
+      "Scikit-learn",
+      "Speech Recognition",
+      "Statistics",
+      "Ubuntu",
+      "VS Code",
+      "Whisper",
+      "Windows",
       "scikit-learn"
     ],
     "programming_languages": {
-      "TypeScript": 53.96,
-      "Python": 18.92,
-      "HTML": 10.44,
-      "CSS": 9.37,
-      "JavaScript": 4.96,
-      "C++": 1.53,
-      "Batchfile": 0.48,
-      "SCSS": 0.32,
+      "TypeScript": 43.33,
+      "Python": 34.9,
+      "HTML": 8.38,
+      "CSS": 7.52,
+      "JavaScript": 3.98,
+      "C++": 1.23,
+      "Batchfile": 0.38,
+      "SCSS": 0.26,
       "Procfile": 0.01
     },
-    "soft_skills": [],
-    "total_technical_skills": 21
+    "soft_skills": [
+      "Problem Solving",
+      "Interpersonal Skills",
+      "Team Coordination",
+      "Mentoring",
+      "Research Skills",
+      "Research",
+      "Public Speaking",
+      "Communication",
+      "Problem-Solving",
+      "Leadership",
+      "Presentation Skills"
+    ],
+    "total_technical_skills": 44
   },
   "education": [
     {
-      "details": "sessions for junior students, addressing topics such as suicidal ideation,"
-    },
-    {
-      "details": "communication, personal conflicts, and emotional well -being."
-    },
-    {
-      "details": " Foster a safe and supportive environment that promotes awareness, resilience, and healthy coping"
-    },
-    {
-      "details": "strategies."
-    },
-    {
-      "details": "One on One Peer Trainer at Centre for Academic and Professional Support                        08/2025 – Present"
-    },
-    {
-      "details": " Delivered individualized academic guidance by assessing performance gaps and developing structured"
-    },
-    {
-      "details": "improvement plans ."
-    },
-    {
-      "details": " Manage d recruitment coordination processes, maintaining organized candidate tracking and onboarding"
-    },
-    {
-      "details": "workflows ."
+      "university": "Christ University, Bangalore",
+      "degree": "B Tech",
+      "field": "Computer science and Engineering, Data Science",
+      "year": "2024 - May 2028)"
     }
   ],
   "certifications": [],
@@ -101,6 +115,13 @@
         "url": "https://github.com/JoelJacobRoji/Course_Management_and_Enrollment_Portal"
       },
       {
+        "name": "Extractor_Vibeathon",
+        "description": null,
+        "language": "Python",
+        "stars": 0,
+        "url": "https://github.com/JoelJacobRoji/Extractor_Vibeathon"
+      },
+      {
         "name": "GitHub_Demo",
         "description": null,
         "language": null,
@@ -113,13 +134,6 @@
         "language": "C++",
         "stars": 0,
         "url": "https://github.com/JoelJacobRoji/JAM_Movie_Ticket_Booking"
-      },
-      {
-        "name": "Personal_Career_Navigator",
-        "description": null,
-        "language": null,
-        "stars": 0,
-        "url": "https://github.com/JoelJacobRoji/Personal_Career_Navigator"
       }
     ]
   },

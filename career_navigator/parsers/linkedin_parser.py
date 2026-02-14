@@ -59,79 +59,137 @@ class LinkedInParser:
     
     def extract_profile_section(self, text: str, section_name: str) -> str:
         """Extract specific section from LinkedIn PDF"""
-        # LinkedIn PDFs have section headers like "Experience", "Education", "Skills"
+        # LinkedIn PDFs have section headers
         pattern = rf'{section_name}\s*\n(.*?)(?:\n[A-Z][a-z]+\s*\n|$)'
         match = re.search(pattern, text, re.DOTALL | re.IGNORECASE)
         return match.group(1).strip() if match else ""
     
     def extract_name(self, text: str) -> str:
-        """Extract name from LinkedIn PDF (usually at top)"""
+        """Extract name from LinkedIn PDF"""
         lines = text.split('\n')
         # Name is typically in first few lines
         for line in lines[:5]:
             line = line.strip()
+            # Clean up "Contact" prefix if present
+            line = line.replace("Contact ", "").replace("CONTACT ", "")
+            
             if len(line) > 3 and len(line) < 50 and not any(char.isdigit() for char in line):
-                # Check if it looks like a name (Title Case, no special chars)
-                if line[0].isupper() and not any(x in line.lower() for x in ['http', 'www', '@']):
-                    return line
+                if line[0].isupper() and not any(x in line.lower() for x in ['http', 'www', '@', '|']):
+                    # Exclude common headers
+                    if line not in ['Summary', 'Experience', 'Education', 'Skills']:
+                        return line
         return "Unknown"
     
     def extract_headline(self, text: str) -> str:
-        """Extract LinkedIn headline (appears after name)"""
+        """Extract LinkedIn headline"""
         lines = text.split('\n')
-        # Headline usually follows name within first 10 lines
-        for i, line in enumerate(lines[:10]):
-            if any(keyword in line.lower() for keyword in ['engineer', 'developer', 'analyst', 'manager', 'specialist', 'consultant']):
+        for i, line in enumerate(lines[:15]):
+            if any(keyword in line for keyword in ['engineer', 'developer', 'analyst', 'manager', 'scientist', 'specialist']):
                 return line.strip()
         return ""
     
     def extract_location(self, text: str) -> str:
         """Extract location"""
-        # Pattern: City, State/Country or City, Country
         pattern = r'([A-Z][a-z]+(?:\s[A-Z][a-z]+)*,\s[A-Z][a-z]+(?:\s[A-Z][a-z]+)*)'
         matches = re.findall(pattern, text)
+        
+        # Filter for actual locations (cities/states)
+        for match in matches:
+            if any(place in match for place in ['India', 'Karnataka', 'Bengaluru', 'Bangalore', 'Delhi', 'Mumbai']):
+                return match
+        
         return matches[0] if matches else ""
     
     def extract_current_position(self, text: str) -> Dict[str, str]:
-        """Extract current job position"""
+        """Extract current job position (filter out awards/certifications)"""
         experience_section = self.extract_profile_section(text, "Experience")
         
         if not experience_section:
             return {"title": "", "company": "", "duration": ""}
         
-        lines = experience_section.split('\n')
+        lines = [line.strip() for line in experience_section.split('\n') if line.strip()]
         
-        # First position is usually current
-        position = {
-            "title": lines[0].strip() if len(lines) > 0 else "",
-            "company": lines[1].strip() if len(lines) > 1 else "",
-            "duration": ""
-        }
+        # Find lines with "Present" (current position)
+        for i, line in enumerate(lines):
+            if "Present" in line or "present" in line:
+                # Look backwards for job title and company
+                title = ""
+                company = ""
+                
+                # Typical format: Company, then Title, then Duration
+                if i >= 2:
+                    company = lines[i - 2]
+                    title = lines[i - 1]
+                elif i >= 1:
+                    title = lines[i - 1]
+                
+                # Filter out certifications/courses/awards
+                excluded_keywords = ['Course', 'Certification', 'Hackathon', 'Award', 
+                                   'Certificate', 'Challenge', 'Workshop']
+                
+                if not any(keyword in title for keyword in excluded_keywords):
+                    return {
+                        "title": title,
+                        "company": company,
+                        "duration": line
+                    }
         
-        # Extract duration
-        duration_pattern = r'(\w+ \d{4} - (?:Present|\w+ \d{4}))'
-        duration_match = re.search(duration_pattern, experience_section)
-        if duration_match:
-            position["duration"] = duration_match.group(1)
+        # Fallback: Get first non-certification entry
+        for i in range(0, min(len(lines), 10), 3):
+            if i + 1 < len(lines):
+                potential_company = lines[i]
+                potential_title = lines[i + 1]
+                
+                # Check if it's a real job (not certification)
+                excluded = ['Course', 'Certification', 'Hackathon', 'Award', 'Certificate']
+                if not any(keyword in potential_title for keyword in excluded):
+                    # Check if company name looks valid
+                    if any(keyword in potential_company for keyword in ['AIESEC', 'IIIC', 'CAPS', 'IEEE', 'University']):
+                        return {
+                            "title": potential_title,
+                            "company": potential_company,
+                            "duration": lines[i + 2] if i + 2 < len(lines) else ""
+                        }
         
-        return position
+        return {"title": "", "company": "", "duration": ""}
     
     def extract_skills(self, text: str) -> List[str]:
-        """Extract skills from LinkedIn PDF"""
-        skills_section = self.extract_profile_section(text, "Skills")
-        
+        """Extract skills from entire LinkedIn PDF"""
         extracted_skills = set()
+        text_lower = text.lower()
         
-        # If dedicated skills section exists
+        # Method 1: Skills section
+        skills_section = self.extract_profile_section(text, "Skills")
+        if not skills_section:
+            skills_section = self.extract_profile_section(text, "Top Skills")
+        
         if skills_section:
             for skill in self.tech_skills_lower:
-                pattern = r'\b' + re.escape(skill) + r'\b'
-                if re.search(pattern, skills_section.lower()):
+                if skill in skills_section.lower():
                     original_skill = next(s for s in Config.TECH_SKILLS if s.lower() == skill)
                     extracted_skills.add(original_skill)
         
-        # Also search entire document
-        text_lower = text.lower()
+        # Method 2: Certifications section (often contains technology names)
+        cert_section = self.extract_profile_section(text, "Certifications")
+        if not cert_section:
+            cert_section = self.extract_profile_section(text, "Licenses & Certifications")
+        
+        if cert_section:
+            for skill in self.tech_skills_lower:
+                pattern = r'\b' + re.escape(skill) + r'\b'
+                if re.search(pattern, cert_section.lower()):
+                    original_skill = next(s for s in Config.TECH_SKILLS if s.lower() == skill)
+                    extracted_skills.add(original_skill)
+        
+        # Method 3: Summary section
+        summary = self.extract_profile_section(text, "Summary")
+        if summary:
+            for skill in self.tech_skills_lower:
+                if skill in summary.lower():
+                    original_skill = next(s for s in Config.TECH_SKILLS if s.lower() == skill)
+                    extracted_skills.add(original_skill)
+        
+        # Method 4: Search entire document
         for skill in self.tech_skills_lower:
             pattern = r'\b' + re.escape(skill) + r'\b'
             if re.search(pattern, text_lower):
@@ -143,7 +201,6 @@ class LinkedInParser:
     def extract_certifications(self, text: str) -> List[str]:
         """Extract certifications"""
         cert_section = self.extract_profile_section(text, "Licenses & Certifications")
-        
         if not cert_section:
             cert_section = self.extract_profile_section(text, "Certifications")
         
@@ -152,8 +209,11 @@ class LinkedInParser:
             lines = cert_section.split('\n')
             for line in lines:
                 line = line.strip()
-                if line and len(line) > 5 and not line.isdigit():
-                    certifications.append(line)
+                # Valid certification: not empty, not too short, not just a company name
+                if line and len(line) > 5:
+                    # Exclude company names that appear alone
+                    if not line in ['Amazon Web Services (AWS)', 'Google Cloud', 'Microsoft']:
+                        certifications.append(line)
         
         return certifications
     
@@ -164,35 +224,50 @@ class LinkedInParser:
         education = []
         
         if edu_section:
-            # Split by university (lines with common university patterns)
-            lines = edu_section.split('\n')
-            current_edu = {}
+            lines = [line.strip() for line in edu_section.split('\n') if line.strip()]
             
-            for line in lines:
-                line = line.strip()
-                if not line:
-                    continue
+            i = 0
+            while i < len(lines):
+                line = lines[i]
                 
-                # Check if it's a degree line
-                if any(deg in line for deg in ['Bachelor', 'Master', 'PhD', 'B.Tech', 'M.Tech', 'MBA', 'B.S', 'M.S']):
-                    if current_edu:
+                # Check if it's a university/school name
+                if any(keyword in line for keyword in ['University', 'Institute', 'College', 'School']):
+                    current_edu = {
+                        "university": line,
+                        "degree": "",
+                        "field": "",
+                        "year": ""
+                    }
+                    
+                    # Look ahead for degree
+                    if i + 1 < len(lines):
+                        next_line = lines[i + 1]
+                        
+                        # Check if it's a degree line
+                        degree_match = re.search(
+                            r'(B\.?\s*Tech|B\.?E\.?|Bachelor|Master|M\.?\s*Tech|MBA|PhD)(?:\s+in\s+)?([A-Za-z\s,&]+?)(?:\s*·|$)',
+                            next_line,
+                            re.IGNORECASE
+                        )
+                        
+                        if degree_match:
+                            current_edu["degree"] = degree_match.group(1).strip()
+                            current_edu["field"] = degree_match.group(2).strip() if len(degree_match.groups()) > 1 else ""
+                            i += 1
+                            
+                            # Look for year
+                            if i + 1 < len(lines):
+                                year_line = lines[i + 1]
+                                if re.search(r'\d{4}', year_line):
+                                    current_edu["year"] = year_line
+                                    i += 1
+                    
+                    if current_edu["degree"] or current_edu["field"]:
                         education.append(current_edu)
-                    current_edu = {"degree": line, "university": "", "year": ""}
                 
-                # Check if it's a university line (usually has "University" or "Institute")
-                elif any(inst in line for inst in ['University', 'Institute', 'College', 'School']):
-                    if current_edu:
-                        current_edu["university"] = line
-                
-                # Check if it's a year
-                elif re.search(r'\d{4}', line):
-                    if current_edu:
-                        current_edu["year"] = line
-            
-            if current_edu:
-                education.append(current_edu)
+                i += 1
         
-        return education
+        return education if education else [{"university": "N/A", "degree": "N/A", "field": "N/A", "year": "N/A"}]
     
     def parse_linkedin_pdf(self, pdf_path: str) -> Dict[str, Any]:
         """Main function to parse LinkedIn PDF"""

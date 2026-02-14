@@ -26,7 +26,7 @@ class Config:
     SAMPLE_DATA_DIR.mkdir(exist_ok=True)
     DATASETS_DIR.mkdir(exist_ok=True)
     
-    # Technical Skills (Top 100+ shown - expand as needed)
+    # Technical Skills (Comprehensive List)
     TECH_SKILLS = {
         # Programming Languages
         "Python", "JavaScript", "Java", "C++", "C#", "TypeScript", "Go", "Rust",
@@ -39,31 +39,50 @@ class Config:
         
         # Databases
         "SQL", "MySQL", "PostgreSQL", "MongoDB", "Redis", "Cassandra", "Oracle",
-        "SQL Server", "DynamoDB", "Neo4j", "Elasticsearch", "Firebase", "Oracle SQL",
+        "SQL Server", "DynamoDB", "Neo4j", "Elasticsearch", "Firebase",
+        "Oracle SQL",
         
         # Cloud & DevOps
-        "AWS", "Azure", "Google Cloud", "Docker", "Kubernetes", "Jenkins",
+        "AWS", "Azure", "Google Cloud", "GCP", "Docker", "Kubernetes", "Jenkins",
         "CI/CD", "Terraform", "Ansible", "Git", "GitHub Actions", "GitLab CI",
-        "CircleCI", "Prometheus", "Grafana", "ELK Stack", "Datadog", "Ubuntu",
+        "CircleCI", "Prometheus", "Grafana", "ELK Stack", "Datadog",
         
-        # Data Science & ML
+        # Data Science & ML (EXPANDED)
         "Machine Learning", "Deep Learning", "TensorFlow", "PyTorch", "Keras",
-        "scikit-learn", "Pandas", "NumPy", "Matplotlib", "Seaborn", "NLP",
-        "Computer Vision", "Neural Networks", "XGBoost", "LightGBM", "BERT", "EDA", "Probability",
+        "scikit-learn", "Scikit-learn", "Pandas", "NumPy", "Matplotlib", "Seaborn",
+        "NLP", "Natural Language Processing", "Computer Vision", "Neural Networks",
+        "XGBoost", "LightGBM", "BERT", "GPT", "Transformers",
+        "EDA", "Exploratory Data Analysis", "Data Cleaning", "Data Visualization",
+        "Statistics", "Statistical Analysis", "Probability", "Statistical Modeling",
+        "Feature Engineering", "Model Deployment", "MLOps",
+        
+        # Audio/Speech Processing
+        "Whisper", "Librosa", "Speech Recognition", "Audio Processing",
         
         # Big Data
         "Apache Spark", "Hadoop", "Kafka", "Airflow", "Databricks", "Snowflake",
         
+        # Development Tools
+        "VS Code", "Jupyter Notebook", "PyCharm", "IntelliJ IDEA", "Eclipse",
+        "Cisco Packet Tracer", "Postman", "Swagger",
+        
+        # Operating Systems
+        "Linux", "Windows", "Ubuntu", "MacOS", "Unix",
+        
         # Testing
         "Unit Testing", "Integration Testing", "Selenium", "Jest", "Pytest",
-        "JUnit", "Cypress", "Test-Driven Development",
+        "JUnit", "Cypress", "Test-Driven Development", "TDD",
         
-        # Other technical skills
-        "Data Structures", "OOP"
+        # Other
+        "Agile", "Scrum", "JIRA", "Confluence", "OOP", "Data Structures",
+        "Algorithms", "Design Patterns",
     }
     
     SOFT_SKILLS = {
-        "Communication", "Leadership", "Problem Solving", "Teamwork",
-        "Time Management", "Critical Thinking", "Adaptability", "Creativity",
-        "Decision Making", "Collaboration", "Presentation Skills"
+        "Communication", "Leadership", "Problem Solving", "Problem-Solving",
+        "Teamwork", "Team Coordination", "Time Management", "Critical Thinking",
+        "Adaptability", "Creativity", "Decision Making", "Collaboration",
+        "Presentation Skills", "Interpersonal Skills", "Public Speaking",
+        "Research Skills", "Research", "Negotiation", "Project Management",
+        "Strategic Planning", "Mentoring", "Analytical Thinking", "Analytical Skills",
     }

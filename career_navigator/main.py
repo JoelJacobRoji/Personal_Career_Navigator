@@ -210,98 +210,81 @@ class CareerNavigator:
     
     def print_summary(self, profile: Dict, job_analysis: Dict = None):
         """Print comprehensive analysis summary"""
-        
         print("\n" + "=" * 80)
         print("📈 COMPREHENSIVE CAREER ANALYSIS SUMMARY")
         print("=" * 80)
-        
         # Personal Info
         print(f"\n👤 PERSONAL INFORMATION")
         print(f"   Name: {profile['personal_info']['name']}")
         print(f"   Email: {profile['personal_info']['email']}")
+        print(f"   Phone: {profile['personal_info'].get('phone', '')}")  # Added phone
         print(f"   Location: {profile['personal_info']['location']}")
         print(f"   Current Role: {profile['personal_info']['current_role']}")
         print(f"   Company: {profile['personal_info']['current_company']}")
-        
         # Experience
         print(f"\n💼 EXPERIENCE")
         print(f"   Years: {profile['experience']['years']}")
         print(f"   GitHub Repos: {profile['experience']['github_repos']}")
         print(f"   GitHub Commits: {profile['experience']['github_commits']}")
         print(f"   GitHub Stars: {profile['experience']['github_stars']}")
-        
         # Skills
         print(f"\n🛠️  SKILLS PORTFOLIO")
         print(f"   Total Technical Skills: {profile['skills']['total_technical_skills']}")
         print(f"   Programming Languages: {len(profile['skills']['programming_languages'])}")
         print(f"   Soft Skills: {len(profile['skills']['soft_skills'])}")
-        
         print(f"\n   Top 10 Technical Skills:")
         for i, skill in enumerate(profile['skills']['technical_skills'][:10], 1):
             print(f"      {i}. {skill}")
-        
+        if profile['skills']['soft_skills']:
+            print(f"\n   Soft Skills:")
+            for skill in profile['skills']['soft_skills']:
+                print(f"      • {skill}")
         if profile['skills']['programming_languages']:
             print(f"\n   Programming Language Proficiency:")
             for lang, pct in list(profile['skills']['programming_languages'].items())[:5]:
                 print(f"      • {lang}: {pct}%")
-        
         # Education
         if profile.get('education'):
             print(f"\n🎓 EDUCATION")
-            for edu in profile['education'][:3]:
+            for edu in profile['education']:
                 if isinstance(edu, dict):
-                    print(f"   • {edu.get('degree', 'N/A')} in {edu.get('field', 'N/A')}")
-                    if edu.get('university'):
-                        print(f"     {edu.get('university')}")
-        
+                    degree = edu.get('degree', 'N/A')
+                    field = edu.get('field', 'N/A')
+                    university = edu.get('university', '')
+                    if degree != 'N/A' or field != 'N/A':
+                        print(f"   • {degree} in {field}")
+                        if university:
+                            print(f"     {university}")
         # Certifications
-        if profile.get('certifications'):
+        if profile.get('certifications') and len(profile['certifications']) > 0:
             print(f"\n📜 CERTIFICATIONS ({len(profile['certifications'])})")
             for cert in profile['certifications'][:5]:
                 print(f"   • {cert}")
-        
         # Job Match Analysis
         if job_analysis:
             print(f"\n" + "=" * 80)
             print(f"🎯 DREAM JOB MATCH ANALYSIS")
             print("=" * 80)
-            
             job_req = job_analysis['job_requirements']
             match = job_analysis['match_analysis']
-            
             print(f"\n📋 Target Position: {job_req['job_title']}")
             print(f"   Required Skills: {job_req['total_skills_required']}")
             print(f"   Experience Required: {job_req['years_experience_required']} years")
-            
             print(f"\n📊 MATCH SCORE: {match['overall_match_score']}%")
             print(f"   {match['recommendation']}")
-            
             print(f"\n✅ Matching Skills ({len(match['matching_skills'])}):")
             for skill in match['matching_skills'][:10]:
                 print(f"      • {skill}")
-            
             if match['missing_skills']:
                 print(f"\n❌ Missing Skills ({len(match['missing_skills'])}):")
                 for skill in match['missing_skills'][:10]:
                     print(f"      • {skill}")
-            
             if match['missing_critical_skills']:
                 print(f"\n🔴 CRITICAL Missing Skills (Priority):")
                 for skill in match['missing_critical_skills']:
                     print(f"      • {skill}")
-        
         print("\n" + "=" * 80 + "\n")
-
-
-def main():
-    """Main execution with interactive input"""
-    
-    # Initialize navigator
-    navigator = CareerNavigator()
-    
-    print("\n" + "=" * 80)
-    print("📝 INPUT COLLECTION")
-    print("=" * 80 + "\n")
+        print("\n" + "=" * 80 + "\n")
     
     # Collect inputs
     print("Please provide the following inputs (press Enter to skip):\n")
@@ -323,13 +306,33 @@ def main():
     dream_job = "\n".join(dream_job_lines).strip()
     
     # Run analysis
+
+def main():
+    navigator = CareerNavigator()
+
+    print("Please provide the following inputs (press Enter to skip):\n")
+    resume_path = input("1️⃣  Resume PDF path: ").strip()
+    github_username = input("2️⃣  GitHub username: ").strip()
+    linkedin_path = input("3️⃣  LinkedIn PDF path: ").strip()
+
+    print("\n4️⃣  Dream Job Description (paste full job description or job title):")
+    print("   (Type or paste, then press Enter twice to finish)\n")
+    dream_job_lines = []
+    while True:
+        line = input()
+        if line == "" and dream_job_lines and dream_job_lines[-1] == "":
+            break
+        dream_job_lines.append(line)
+    dream_job = "\n".join(dream_job_lines).strip()
+
+    # Run analysis
     results = navigator.run(
         resume_path=resume_path if resume_path else None,
         github_username=github_username if github_username else None,
         linkedin_path=linkedin_path if linkedin_path else None,
         dream_job=dream_job if dream_job else None
     )
-    
+
     print("\n✅ Analysis complete! Check 'outputs/' folder for detailed results.")
 
 

@@ -18,52 +18,47 @@
     ],
     "critical_skills": [
       "Statistics",
-      "Data Visualization",
       "EDA",
-      "Scikit-learn",
-      "Pandas",
-      "Deep Learning",
-      "Matplotlib",
-      "Python",
+      "NumPy",
       "NLP",
-      "SQL"
+      "C",
+      "Deep Learning",
+      "Scikit-learn",
+      "Machine Learning",
+      "Pandas",
+      "Matplotlib"
     ],
     "years_experience_required": 0,
     "education_required": [],
     "total_skills_required": 13
   },
   "match_analysis": {
-    "overall_match_score": 55.08,
-    "skills_match_percentage": 46.15,
-    "critical_skills_match_percentage": 40.0,
+    "overall_match_score": 89.31,
+    "skills_match_percentage": 84.62,
+    "critical_skills_match_percentage": 90.0,
     "matching_skills": [
       "C",
       "Deep Learning",
+      "EDA",
+      "Matplotlib",
       "NLP",
       "NumPy",
       "Pandas",
-      "Python"
+      "Python",
+      "SQL",
+      "Scikit-learn",
+      "Statistics"
     ],
     "missing_skills": [
       "Data Visualization",
-      "EDA",
-      "Machine Learning",
-      "Matplotlib",
-      "SQL",
-      "Scikit-learn",
-      "Statistics"
+      "Machine Learning"
     ],
     "missing_critical_skills": [
-      "Data Visualization",
-      "EDA",
-      "Matplotlib",
-      "SQL",
-      "Scikit-learn",
-      "Statistics"
+      "Machine Learning"
     ],
     "experience_match": true,
-    "user_experience_years": 0,
+    "user_experience_years": 1,
     "required_experience_years": 0,
-    "recommendation": "🟠 Fair Match - 30-day roadmap recommended"
+    "recommendation": "🟢 Excellent Match - Apply Now!"
   }
 }
